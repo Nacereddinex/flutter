@@ -28,7 +28,7 @@ class _addTaskPageState extends State<addTaskPage> {
 
   List<int> remindList = [5, 10, 15, 20];
   int _selectRemind = 5;
-  String _selectRepeat = "none";
+  String _selectRepeat = "None";
   int selectedColor = 0;
   @override
   Widget build(BuildContext context) {
@@ -78,15 +78,15 @@ class _addTaskPageState extends State<addTaskPage> {
                 children: [
                   Expanded(
                       child: MyInputField(
-                        title: 'Hour',
-                        hint: _hour,
-                        widget: IconButton(
-                          icon: Icon(Icons.av_timer),
-                          onPressed: () {
-                            _getTimeFromUser();
-                          },
-                        ),
-                      ))
+                    title: 'Hour',
+                    hint: _hour,
+                    widget: IconButton(
+                      icon: Icon(Icons.av_timer),
+                      onPressed: () {
+                        _getTimeFromUser();
+                      },
+                    ),
+                  ))
                 ],
               ),
               MyInputField(
@@ -149,20 +149,17 @@ class _addTaskPageState extends State<addTaskPage> {
   _addReminderToDB() async {
     int value = await _reminderController.addReminder(
         rem: reminder(
-            name: _titleController.text,
-
-            dosage: _dosageController.text,
-            type: _typeController.text,
-            note: _noteController.text,
-            date: DateFormat.yMd().format(_selectedDate),
-            startTime: _hour,
-            endTime: _hour,
-            remind: _selectRemind,
-            repeat: _selectRepeat,
-            isCompleted: 0,
-
-
-            ));
+      name: _titleController.text,
+      dosage: _dosageController.text,
+      type: _typeController.text,
+      note: _noteController.text,
+      date: DateFormat.yMd().format(_selectedDate),
+      startTime: _hour,
+      endTime: _hour,
+      remind: _selectRemind,
+      repeat: _selectRepeat,
+      isCompleted: 0,
+    ));
     print("$value  has been inserted");
 
     /* ;*/
@@ -222,11 +219,11 @@ class _addTaskPageState extends State<addTaskPage> {
     String timetemp = 'null';
 
     var pickedTime = await showTimePicker(
-        initialEntryMode: TimePickerEntryMode.input,
-        context: context,
-        initialTime: TimeOfDay(hour: 9, minute: 10))
+            initialEntryMode: TimePickerEntryMode.input,
+            context: context,
+            initialTime: TimeOfDay(hour: 9, minute: 10))
         .then((value) => (timetemp =
-    "${value?.hour.toString().padLeft(2, '0')}:${value?.minute.toString().padLeft(2, '0')}"));
+            "${value?.hour.toString().padLeft(2, '0')}:${value?.minute.toString().padLeft(2, '0')}"));
     setState(() {
       _hour = timetemp;
     });

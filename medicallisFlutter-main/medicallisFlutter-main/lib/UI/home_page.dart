@@ -56,11 +56,17 @@ class _HomePageState extends State<HomePage> {
         return ListView.builder(
             itemCount: _reminderController.reminderList.length,
             itemBuilder: (_, index) {
-              print(_reminderController.reminderList.length);
               reminder r = _reminderController.reminderList[index];
-
-              print(r.startTime);
+              //print(DateFormat.yMd()                   .parse(DateFormat.yMd().format(_selectDate).toString())                   .weekday);
               //print(r.toJson());
+              print('weekday from date: ' +
+                  DateFormat.yMd().parse(r.date!).weekday.toString());
+              print('weekday from selected :' +
+                  DateFormat.yMd()
+                      .parse(DateFormat.yMd().format(_selectDate).toString())
+                      .weekday
+                      .toString());
+
               if (r.repeat == 'Daily') {
                 notifHelper.scheduledNotification(
                     int.parse(r.startTime.toString().split(':')[0]),
@@ -68,31 +74,138 @@ class _HomePageState extends State<HomePage> {
                     r);
                 return GestureDetector(
                   onTap: () {
-                    print(_reminderController.reminderList[index].isCompleted);
                     _showBottomPopUp(
                         context, _reminderController.reminderList[index]);
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 5),
                     width: 100,
-                    height: 50,
+                    height: 100,
                     margin: const EdgeInsets.all(10),
                     color:
                         _reminderController.reminderList[index].isCompleted == 1
                             ? Colors.grey
                             : Color.fromARGB(255, 68, 79, 238),
-                    child: Row(
+                    child: Column(
                       children: [
-                        Text(
-                          _reminderController.reminderList[index].name
-                              .toString(),
-                          style: ReminderStyle,
+                        Row(
+                          children: [
+                            Text(
+                              _reminderController.reminderList[index].name
+                                  .toString(),
+                              style: ReminderStyle,
+                            ),
+                            Spacer(),
+                            Text(
+                                _reminderController
+                                    .reminderList[index].startTime
+                                    .toString(),
+                                style: ReminderStyle),
+                          ],
                         ),
-                        Spacer(),
-                        Text(
-                            _reminderController.reminderList[index].startTime
-                                .toString(),
-                            style: ReminderStyle),
+                        Row(
+                          children: [
+                            Text(
+                                'Dosage :' +
+                                    _reminderController
+                                        .reminderList[index].dosage
+                                        .toString(),
+                                style: ReminderStyle),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                'Type :' +
+                                    _reminderController.reminderList[index].type
+                                        .toString(),
+                                style: ReminderStyle),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                'Note :' +
+                                    _reminderController.reminderList[index].note
+                                        .toString(),
+                                style: ReminderStyle),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+
+              if (r.repeat == 'Weekly' &&
+                  DateFormat.yMd().parse(r.date!).weekday ==
+                      DateFormat.yMd()
+                          .parse(
+                              DateFormat.yMd().format(_selectDate).toString())
+                          .weekday) {
+                notifHelper.scheduledNotification(
+                    int.parse(r.startTime.toString().split(':')[0]),
+                    int.parse(r.startTime.toString().split(':')[1]),
+                    r);
+                return GestureDetector(
+                  onTap: () {
+                    _showBottomPopUp(
+                        context, _reminderController.reminderList[index]);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    width: 100,
+                    height: 100,
+                    margin: const EdgeInsets.all(10),
+                    color:
+                        _reminderController.reminderList[index].isCompleted == 1
+                            ? Colors.grey
+                            : Color.fromARGB(255, 68, 79, 238),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              _reminderController.reminderList[index].name
+                                  .toString(),
+                              style: ReminderStyle,
+                            ),
+                            Spacer(),
+                            Text(
+                                _reminderController
+                                    .reminderList[index].startTime
+                                    .toString(),
+                                style: ReminderStyle),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                'Dosage :' +
+                                    _reminderController
+                                        .reminderList[index].dosage
+                                        .toString(),
+                                style: ReminderStyle),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                'Type :' +
+                                    _reminderController.reminderList[index].type
+                                        .toString(),
+                                style: ReminderStyle),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                'Note :' +
+                                    _reminderController.reminderList[index].note
+                                        .toString(),
+                                style: ReminderStyle),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -102,31 +215,63 @@ class _HomePageState extends State<HomePage> {
               if (r.date == DateFormat.yMd().format(_selectDate)) {
                 return GestureDetector(
                   onTap: () {
-                    print(_reminderController.reminderList[index].isCompleted);
                     _showBottomPopUp(
                         context, _reminderController.reminderList[index]);
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 5),
                     width: 100,
-                    height: 50,
+                    height: 100,
                     margin: const EdgeInsets.all(10),
                     color:
                         _reminderController.reminderList[index].isCompleted == 1
                             ? Colors.grey
                             : Color.fromARGB(255, 68, 79, 238),
-                    child: Row(
+                    child: Column(
                       children: [
-                        Text(
-                          _reminderController.reminderList[index].name
-                              .toString(),
-                          style: ReminderStyle,
+                        Row(
+                          children: [
+                            Text(
+                              _reminderController.reminderList[index].name
+                                  .toString(),
+                              style: ReminderStyle,
+                            ),
+                            Spacer(),
+                            Text(
+                                _reminderController
+                                    .reminderList[index].startTime
+                                    .toString(),
+                                style: ReminderStyle),
+                          ],
                         ),
-                        Spacer(),
-                        Text(
-                            _reminderController.reminderList[index].startTime
-                                .toString(),
-                            style: ReminderStyle),
+                        Row(
+                          children: [
+                            Text(
+                                'Dosage :' +
+                                    _reminderController
+                                        .reminderList[index].dosage
+                                        .toString(),
+                                style: ReminderStyle),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                'Type :' +
+                                    _reminderController.reminderList[index].type
+                                        .toString(),
+                                style: ReminderStyle),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                                'Note :' +
+                                    _reminderController.reminderList[index].note
+                                        .toString(),
+                                style: ReminderStyle),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -142,7 +287,7 @@ class _HomePageState extends State<HomePage> {
   _showBottomPopUp(BuildContext context, reminder rem) {
     Get.bottomSheet(Container(
       padding: const EdgeInsets.only(top: 4),
-      height: MediaQuery.of(context).size.height * 0.37,
+      height: MediaQuery.of(context).size.height * 0.29,
       color: Colors.white,
       child: Column(
         children: [
@@ -153,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(10), color: Colors.blue),
           ),
           SizedBox(height: 10),
-          _btnSheet(
+          /*_btnSheet(
               Label: "Mark as Completed ",
               context: context,
               onTap: () {
@@ -161,7 +306,7 @@ class _HomePageState extends State<HomePage> {
                 _reminderController.markcompleted(rem.id!);
                 _reminderController.getReminders();
               },
-              clr: Colors.blue),
+              clr: Colors.blue),*/
           _btnSheet(
               Label: "Delete",
               context: context,

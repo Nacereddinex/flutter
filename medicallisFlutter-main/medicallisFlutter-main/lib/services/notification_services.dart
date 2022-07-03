@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:get/get.dart';
+import 'package:medicallis/UI/notificationpage.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -59,7 +60,6 @@ class notifyHelper {
   }
 
   scheduledNotification(int hour, int minute, reminder rem) async {
-    print('notification 10 seconds ');
     // ignore: avoid_print
     print(hour);
     int newTime = minute;
@@ -76,7 +76,37 @@ class notifyHelper {
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
-        matchDateTimeComponents: DateTimeComponents.time);
+        matchDateTimeComponents: DateTimeComponents.time,
+        payload: '${rem.name} # ' +
+            '${rem.dosage} # ' +
+            '${rem.note} # ' +
+            '${rem.startTime} # ' +
+            '${rem.repeat} # ');
+  }
+
+  scheduledNotificationWeekly(int hour, int minute, reminder rem) async {
+    // ignore: avoid_print
+    print(hour);
+    int newTime = minute;
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        rem.id!,
+        rem.name,
+        rem.dosage,
+        _convertTime(hour, minute),
+        //tz.TZDateTime.now(tz.local).add(const Duration(seconds: newTime)),
+        const NotificationDetails(
+            android: AndroidNotificationDetails(
+                'your channel id', 'your channel name',
+                channelDescription: 'your channel description')),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.time,
+        payload: '${rem.name} # ' +
+            '${rem.dosage} # ' +
+            '${rem.note} # ' +
+            '${rem.startTime} # ' +
+            '${rem.repeat} # ');
   }
 
   tz.TZDateTime _convertTime(int hour, int minute) {
@@ -112,9 +142,7 @@ class notifyHelper {
     } else {
       print("Notification Done");
     }
-    Get.to(() => Container(
-          color: Colors.black,
-        ));
+    Get.to(() => NotificationPage(label: payload));
   }
 
 //int id, String title, String body, String payload
