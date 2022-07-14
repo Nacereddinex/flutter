@@ -89,7 +89,7 @@ class _addTaskPageState extends State<addTaskPage> {
                   ))
                 ],
               ),
-              MyInputField(
+              /*MyInputField(
                 title: "Remind",
                 hint: "$_selectRemind minutes early",
                 widget: DropdownButton(
@@ -107,7 +107,7 @@ class _addTaskPageState extends State<addTaskPage> {
                     DropdownMenuItem(child: Text("20"), value: "20"),
                   ],
                 ),
-              ),
+              ),*/
               MyInputField(
                 title: "Repeat",
                 hint: "$_selectRepeat ",
@@ -123,7 +123,7 @@ class _addTaskPageState extends State<addTaskPage> {
                     DropdownMenuItem(child: Text("None"), value: "None"),
                     DropdownMenuItem(child: Text("Daily"), value: "Daily"),
                     DropdownMenuItem(child: Text("Weekly"), value: "Weekly"),
-                    DropdownMenuItem(child: Text("Monthly"), value: "Monthly"),
+                    //DropdownMenuItem(child: Text("Monthly"), value: "Monthly"),
                   ],
                 ),
               ),
@@ -188,7 +188,7 @@ class _addTaskPageState extends State<addTaskPage> {
           size: 20,
         ),
       ),
-      actions: [
+      /*actions: [
         Icon(
           Icons.person,
           size: 20,
@@ -196,7 +196,7 @@ class _addTaskPageState extends State<addTaskPage> {
         SizedBox(
           width: 20,
         )
-      ],
+      ],*/
     );
   }
 

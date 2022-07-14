@@ -56,3 +56,38 @@ class reminder {
     return data;
   }
 }
+
+class tracker {
+  int? id;
+  String? Weight;
+  String? Time;
+  String? BloodSugar;
+  String? BloodPressure;
+
+  tracker({
+    this.id,
+    this.Weight,
+    this.Time,
+    this.BloodPressure,
+    this.BloodSugar,
+  });
+
+  tracker.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    Weight = json['Weight'];
+    Time = json['Time'];
+    BloodPressure = json['BloodPressure'];
+    BloodSugar = json['BloodSugar'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['Weight'] = this.Weight;
+    data['Time'] = this.Time;
+    data['BloodPressure'] = this.BloodPressure;
+    data['BloodSugar'] = this.BloodSugar;
+
+    return data;
+  }
+}

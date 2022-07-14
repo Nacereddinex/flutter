@@ -19,13 +19,16 @@ class db {
       _db = await openDatabase(
         _path,
         version: _version,
-        onCreate: (db, version) {
+        onCreate: (db, version) async {
           print(" a new database has been created ");
-          return db.execute("CREATE TABLE $_tableName ("
+          await db.execute("CREATE TABLE $_tableName ("
               "id INTEGER PRIMARY KEY AUTOINCREMENT,"
               "name STRING, dosage STRING, type STRING, note STRING"
               ", date STRING,  startTime STRING, endTime  STRING ,"
               "remind STRING, repeat STRING, isCompleted INTEGER)");
+          await db.execute("CREATE TABLE test ("
+              "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "Weight STRING, Time STRING, BloodSugar STRING, BloodPressure STRING)");
         },
       );
     } catch (e) {
@@ -53,5 +56,16 @@ class db {
     SET isCompleted= ?
     WHERE id= ?
     ''', [1, id]);
+  }
+
+  // trackers
+  static Future<int> inserttrc(tracker? trc) async {
+    print('insert function for trackers');
+    return await _db?.insert('test', trc!.toJson()) ?? 1;
+  }
+
+  static Future<List<Map<String, dynamic>>> querytrc() async {
+    print('query function called for trackers');
+    return await _db!.query('test');
   }
 }

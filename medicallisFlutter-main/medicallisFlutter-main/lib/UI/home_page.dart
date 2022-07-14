@@ -5,12 +5,13 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:medicallis/UI/add_task_bar.dart';
+import 'package:medicallis/UI/add_rem_bar.dart';
 import 'package:medicallis/UI/theme.dart';
 import 'package:medicallis/UI/widgets/button.dart';
 import 'package:medicallis/controllers/reminders_controller.dart';
 import 'package:medicallis/models/reminder.dart';
 import 'package:medicallis/services/notification_services.dart';
+import 'widgets/DrawerWidget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,7 +36,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
+      drawer: NavigationDrawer(),
+      appBar: AppBar(
+        title: Text('Medicallis App '),
+      ),
       body: Column(
         children: [
           /**/
@@ -432,7 +436,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       title: Text('Medicallis App '),
-      actions: [
+      /*actions: [
         Icon(
           Icons.person,
           size: 20,
@@ -440,7 +444,7 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           width: 20,
         )
-      ],
+      ],*/
     );
   }
 }

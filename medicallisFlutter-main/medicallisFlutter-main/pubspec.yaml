@@ -43,6 +43,12 @@ dependencies:
   date_picker_timeline: ^1.2.3
   sqflite: ^2.0.2+1
   ffi: ^2.0.0
+  http: 
+  google_ml_kit: ^0.11.0
+  image_picker: ^0.8.5+3
+  qr_code_scanner: ^1.0.0
+ 
+  
   
 
 dev_dependencies:

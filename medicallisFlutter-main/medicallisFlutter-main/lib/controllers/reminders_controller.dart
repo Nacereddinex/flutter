@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../models/reminder.dart';
@@ -21,6 +22,36 @@ class ReminderController extends GetxController {
 
     reminderList.assignAll(
         reminders.map((data) => new reminder.fromJson(data)).toList());
+  }
+
+  void delete(reminder rem) {
+    db.delete(rem);
+  }
+
+  void markcompleted(int id) async {
+    await db.update(id);
+    print('marked as completed');
+  }
+}
+
+class TrackerController extends GetxController {
+  @override
+  void onReady() {
+    getTrackers();
+    super.onReady();
+  }
+
+  var trackerList = <tracker>[].obs;
+
+  Future<int> addTracker({tracker? trc}) async {
+    return await db.inserttrc(trc);
+  }
+
+  void getTrackers() async {
+    /*List<Map<String, dynamic>> trc = await db.querytrc();
+
+    trackerList
+        .assignAll(trc.map((data)  =>  tracker.fromJson(data)).toList());*/
   }
 
   void delete(reminder rem) {
