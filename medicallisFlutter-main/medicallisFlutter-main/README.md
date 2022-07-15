@@ -13,6 +13,11 @@ Our aim is Help these caregivers manage the overwhelming amounts of tasks they h
 In Germany 3.3m – 5.2m people who work and provide care for a loved one, 3 – 4 hours spent on care daily 40% – 60% suffer from burnout or depression. The financial loss for companies is 14.000 EUR / year  for each caregiver employee is 55bn €/year in Germany 260bn $/year 
 
 
+
+
+
+
+
 Convallis wants to help with: 
 
 -Caregivers continuous education
@@ -22,7 +27,19 @@ Convallis wants to help with:
 
 
 
-functionalities that we decided for our product 
+
+
+
+
+
+
+
+
+
+
+
+
+functionalities that we decided for our product: 
 
 
 -medication reminder notifications :  provide notification for the caregiver for the times of the medication, along with information about the medication, 
